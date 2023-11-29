@@ -28,26 +28,26 @@ void loop() {
   int buttonRead2 = digitalRead(button2);
   int potenRead = analogRead(poten);
 
-  if (!buttonPress2 && buttonRead2 == HIGH) {
+  if (!buttonPress2 && buttonRead2 == HIGH && (currentTime - startTime < 10000)) { // if button 2 is pressed and time is less than 10 seconds
     buttonPress2 = true;
     startTime = currentTime;
   }
 
-  if (!potenTurn && buttonPress2 && (currentTime - startTime < 10000)) {
+  if (!potenTurn && buttonPress2 && (currentTime - startTime < 10000)) { // if potenetimeter is truned to max and button 2 is true and time is less than 10 seconds
     if (potenRead >= 1023) {
       potenTurn = true;
     }
   }
 
-  if (buttonPress2 && potenTurn && buttonRead1 == HIGH && (currentTime - startTime < 10000)) {
+  if (buttonPress2 && potenTurn && buttonRead1 == HIGH && (currentTime - startTime < 10000)) { // if button 1 is pressed and potenetimeter and button 2 are true and time is less than 10 seconds
     buttonPress1 = true;
   }
 
-  if (buttonPress2 && potenTurn && buttonPress1) {
-    digitalWrite(yellowLED, HIGH);
+  if (buttonPress2 && potenTurn && buttonPress1) { // if all cases are true
+    digitalWrite(yellowLED, HIGH); // shine yellow LED not red
     digitalWrite(redLED, LOW);
   } else {
-    digitalWrite(yellowLED, LOW);
+    digitalWrite(yellowLED, LOW); // shine red LED not yellow
     digitalWrite(redLED, HIGH);
   }
 
