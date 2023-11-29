@@ -5,3 +5,5 @@ I wanted my finite state machine to consist of 3 steps for successful opening of
 Below is an image of what the real-world application of my finite state machine would look like as a lockpad.
 ![](draw1.JPEG)
 
+This is a schematic of how I aimed to prepare my circuit board setup. 
+![](draw2.JPEG)
