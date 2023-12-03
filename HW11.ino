@@ -28,6 +28,7 @@ void loop() {
   int buttonRead2 = digitalRead(button2);
   int potenRead = analogRead(poten);
 
+
   if (!buttonPress2 && buttonRead2 == HIGH && (currentTime - startTime < 10000)) { // if button 2 is pressed and time is less than 10 seconds
     buttonPress2 = true;
     startTime = currentTime;
@@ -36,6 +37,7 @@ void loop() {
   if (!potenTurn && buttonPress2 && (currentTime - startTime < 10000)) { // if potenetimeter is truned to max and button 2 is true and time is less than 10 seconds
     if (potenRead >= 1023) {
       potenTurn = true;
+      // add time
     }
   }
 
@@ -46,10 +48,11 @@ void loop() {
   if (buttonPress2 && potenTurn && buttonPress1) { // if all cases are true
     digitalWrite(yellowLED, HIGH); // shine yellow LED not red
     digitalWrite(redLED, LOW);
-  } else {
+  } else if (currentTime - startTime > 10000) {
     digitalWrite(yellowLED, LOW); // shine red LED not yellow
     digitalWrite(redLED, HIGH);
   }
 
-  delay(100);
+Serial.println(String(buttonPress2) + " " + potenTurn + " " + buttonPress1 );
+  delay(2);
 }
